@@ -1,1 +1,11 @@
 https://hub.docker.com/_/ros/
+
+$ docker build -t my/ros:foxy .
+
+$ docker run -it --rm my/ros:foxy
+
+start bash, after setting up /opt/ros/${ROS_DISTRO}/setup.bas
+$ docker run -it --rm my/ros:foxy /ros_entrypoint.sh /bin/bash
+
+persistent volumes
+$ docker run -v "/home/rgc/.ros/:/root/.ros/" ros
