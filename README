@@ -7,5 +7,12 @@ $ docker run -it --rm my/ros:foxy
 start bash, after setting up /opt/ros/${ROS_DISTRO}/setup.bas
 $ docker run -it --rm my/ros:foxy /ros_entrypoint.sh /bin/bash
 
-persistent volumes
+persistent ROS logs, etc only
 $ docker run -v "/home/rgc/.ros/:/root/.ros/" ros
+
+$ docker volume create --name althome --driver local \
+--opt type=nfs3 \
+--opt o=addr=10.13.37.1,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14 \
+--opt device=:/home
+
+$ docker run -it -v /althome:/althome --rm my/ros:foxy /ros_entrypoint.sh /bin/bash
