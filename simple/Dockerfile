@@ -2,6 +2,8 @@ FROM ros:foxy
 
 # install ros package
 RUN useradd -d /althome/rgc -s /bin/bash rgc && \
+      echo rgc:rgc | chpasswd && adduser rgc sudo && \
+      echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     apt-get update && apt-get install -y \
       ros-${ROS_DISTRO}-demo-nodes-cpp \
       ros-${ROS_DISTRO}-demo-nodes-py && \
